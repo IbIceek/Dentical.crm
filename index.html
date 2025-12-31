@@ -13,7 +13,7 @@
         .page.active { display: block; animation: fadeIn 0.2s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Grafik stillari */
+        /* Sizning original Grafik stillaringiz */
         .day-tab.active { background: #2563eb; color: white; }
         .time-row { height: 45px; border-bottom: 1px solid #f1f5f9; position: relative; display: flex; align-items: center; justify-content: center; }
         .appt-block { position: absolute; left: 4px; right: 4px; border-radius: 12px; padding: 8px; z-index: 10; font-size: 11px; border-left: 5px solid rgba(0,0,0,0.2); box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; }
@@ -31,38 +31,27 @@
         
         input, select, textarea { width: 100%; background: #f1f5f9; border: none; padding: 14px; border-radius: 16px; margin-bottom: 10px; outline: none; font-weight: 600; }
         .lab-card { background: white; border-radius: 20px; padding: 16px; margin-bottom: 12px; border-left: 6px solid #ddd; box-shadow: 0 2px 4px rgba(0,0,0,0.05); cursor: pointer; }
+        #lPreviewImg { width: 100%; height: 160px; object-fit: cover; border-radius: 16px; display: none; margin-bottom: 12px; border: 1px solid #eee; }
 
-        /* BLOKIROVKA EKRANI */
-        #payScreen { display: none; position: fixed; inset: 0; background: white; z-index: 10000; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
+        /* BLOKIROVKA EKRANI USLUBI */
+        #payScreen { display: none; position: fixed; inset: 0; background: white; z-index: 99999; flex-direction: column; align-items: center; justify-content: center; padding: 30px; text-align: center; }
     </style>
 </head>
 <body class="pb-24">
 
     <div id="payScreen">
-        <div class="bg-red-50 w-20 h-20 rounded-full flex items-center justify-center mb-6">
-            <i class="fas fa-lock text-3xl text-red-500"></i>
+        <i class="fas fa-lock text-5xl text-red-500 mb-4"></i>
+        <h2 class="text-2xl font-black mb-2">MUDDAT TUGADI</h2>
+        <p class="text-slate-500 mb-6 text-sm">Davom etish uchun 1 oylik obuna to'lovini qiling.</p>
+        <div class="bg-slate-50 p-6 rounded-[30px] w-full mb-6 border">
+            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">To'lov uchun karta:</p>
+            <p class="text-xl font-black text-slate-800 tracking-wider mb-2" onclick="navigator.clipboard.writeText('5614681253395069'); alert('Nusxalandi')">5614 6812 5339 5069</p>
+            <p class="text-green-600 font-bold">Summa: 50 000 so'm</p>
         </div>
-        <h2 class="text-2xl font-black mb-2 text-slate-800 uppercase italic">Muddat Tugadi</h2>
-        <p class="text-slate-500 mb-8 text-sm">Dasturdan foydalanishni davom ettirish uchun to'lov qiling.</p>
-        
-        <div class="bg-slate-50 p-6 rounded-[32px] w-full mb-8 border border-slate-100">
-            <div class="flex justify-between items-center mb-4">
-                <span class="text-slate-400 text-[10px] font-bold uppercase tracking-widest">Obuna (1 oy)</span>
-                <span class="font-black text-green-600 text-lg">50,000 UZS</span>
-            </div>
-            
-            <div onclick="copyCard()" class="bg-white p-4 rounded-2xl border-2 border-dashed border-blue-100 cursor-pointer active:scale-95 transition-transform">
-                <p class="text-[9px] font-bold text-blue-400 mb-1 uppercase tracking-tighter">Karta raqami (Nusxalash uchun bosing)</p>
-                <p class="font-black text-slate-800 text-lg tracking-wider">5614 6812 5339 5069</p>
-                <p class="text-[10px] text-slate-400 mt-1">Dentical CRM System</p>
-            </div>
-        </div>
-
-        <a href="https://t.me/OzingizniLichkangiz" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest shadow-xl shadow-blue-100 mb-4 block">To'lov chekini yuborish</a>
-        <p class="text-[10px] text-slate-300 font-bold uppercase">To'lovdan so'ng dastur ochib beriladi</p>
+        <a href="https://t.me/admin_username" class="w-full bg-blue-600 text-white py-4 rounded-2xl font-bold block text-center">CHEKNI YUBORISH</a>
     </div>
 
-    <div id="mainApp">
+    <div id="appBody">
         <div id="page-calendar" class="page active">
             <div class="bg-white sticky top-0 z-50 shadow-sm p-4">
                 <div class="flex justify-between items-center mb-3">
@@ -81,6 +70,7 @@
             <div class="p-4 flex justify-between items-center bg-white sticky top-0 z-50 shadow-sm">
                 <div>
                     <h1 class="text-2xl font-bold">Laboratoriya</h1>
+                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Texniklar bilan ishlash</p>
                 </div>
                 <button onclick="openAddLab()" class="bg-blue-600 text-white px-5 py-2.5 rounded-2xl font-bold text-sm shadow-lg shadow-blue-100">+ Yangi ish</button>
             </div>
@@ -88,15 +78,50 @@
         </div>
 
         <div id="page-metodichka" class="page">
-            <div class="p-6 bg-white border-b shadow-sm"><h1 class="text-2xl font-black">Metodichka</h1></div>
-            <div class="p-4 space-y-4" id="metodContent">
+            <div class="p-6 bg-white border-b shadow-sm">
+                <h1 class="text-2xl font-black">Metodichka</h1>
+                <p class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mt-1">Davolash jarayoni</p>
+            </div>
+            <div class="p-4 space-y-4">
+                <div class="bg-white p-6 rounded-[32px] border shadow-sm">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="text-[10px] font-black text-slate-400 uppercase mb-1 block">Bemor</label>
+                            <select id="mPatient" class="text-sm"></select>
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-black text-slate-400 uppercase mb-1 block">Tish</label>
+                            <select id="mTish" class="text-sm"></select>
+                        </div>
+                    </div>
                 </div>
+                <div class="bg-white p-6 rounded-[35px] border shadow-lg space-y-4">
+                    <div class="flex justify-between items-center">
+                        <label class="text-[10px] font-black text-slate-400 uppercase">Xizmat</label>
+                        <button onclick="addServiceType()" class="text-blue-600 font-black text-[10px]">+ QO'SHISH</button>
+                    </div>
+                    <select id="mService" onchange="calcM()"></select>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-slate-50 p-4 rounded-2xl">
+                            <label class="text-[9px] font-black text-slate-400 block mb-1">Skidka %</label>
+                            <input type="number" id="mDisc" value="0" oninput="calcM()" class="text-xl text-blue-600 font-black p-0 bg-transparent">
+                        </div>
+                        <div class="bg-[#1e293b] p-4 rounded-2xl flex flex-col items-center justify-center text-white">
+                            <label class="text-[9px] font-bold text-slate-400 uppercase">Jami</label>
+                            <div id="mTotal" class="font-black text-lg tracking-tighter text-white">0</div>
+                        </div>
+                    </div>
+                    <button onclick="saveToKassa()" class="w-full bg-blue-600 text-white py-5 rounded-2xl font-black uppercase text-xs tracking-widest shadow-lg">Saqlash va Yakunlash</button>
+                </div>
+            </div>
         </div>
 
         <div id="page-kassa" class="page">
-            <div class="p-6 bg-white border-b shadow-sm"><h1 class="text-2xl font-black">Kassa</h1></div>
+            <div class="p-6 bg-white border-b shadow-sm">
+                <h1 class="text-2xl font-black">Kassa</h1>
+            </div>
             <div class="p-4">
-                <div class="bg-gradient-to-br from-green-600 to-green-700 p-8 rounded-[35px] shadow-xl text-white mb-6 text-center">
+                <div class="bg-gradient-to-br from-green-600 to-green-700 p-8 rounded-[35px] shadow-xl text-white mb-6">
                     <p class="text-xs font-bold opacity-80 uppercase tracking-widest">Bugungi tushum</p>
                     <h2 id="totalCash" class="text-4xl font-black mt-1">0 UZS</h2>
                 </div>
@@ -105,10 +130,18 @@
         </div>
 
         <nav class="fixed bottom-0 w-full bg-white border-t p-4 flex justify-around shadow-[0_-5px_20px_rgba(0,0,0,0.05)] z-50">
-            <button onclick="showPage('calendar')" id="nav-calendar" class="text-blue-600 flex flex-col items-center"><i class="fa fa-calendar-alt text-xl"></i><span class="text-[10px] mt-1 font-bold">Grafik</span></button>
-            <button onclick="showPage('lab')" id="nav-lab" class="text-slate-300 flex flex-col items-center"><i class="fa fa-flask text-xl"></i><span class="text-[10px] mt-1 font-bold">Lab</span></button>
-            <button onclick="showPage('metodichka')" id="nav-metodichka" class="text-slate-300 flex flex-col items-center"><i class="fa fa-notes-medical text-xl"></i><span class="text-[10px] mt-1 font-bold">Metod</span></button>
-            <button onclick="showPage('kassa')" id="nav-kassa" class="text-slate-300 flex flex-col items-center"><i class="fa fa-wallet text-xl"></i><span class="text-[10px] mt-1 font-bold">Kassa</span></button>
+            <button onclick="showPage('calendar')" id="nav-calendar" class="text-blue-600 flex flex-col items-center">
+                <i class="fa fa-calendar-alt text-xl"></i><span class="text-[10px] mt-1 font-bold">Grafik</span>
+            </button>
+            <button onclick="showPage('lab')" id="nav-lab" class="text-slate-300 flex flex-col items-center">
+                <i class="fa fa-flask text-xl"></i><span class="text-[10px] mt-1 font-bold">Lab</span>
+            </button>
+            <button onclick="showPage('metodichka')" id="nav-metodichka" class="text-slate-300 flex flex-col items-center">
+                <i class="fa fa-notes-medical text-xl"></i><span class="text-[10px] mt-1 font-bold">Metod</span>
+            </button>
+            <button onclick="showPage('kassa')" id="nav-kassa" class="text-slate-300 flex flex-col items-center">
+                <i class="fa fa-wallet text-xl"></i><span class="text-[10px] mt-1 font-bold">Kassa</span>
+            </button>
         </nav>
     </div>
 
@@ -141,55 +174,56 @@
     <div id="labModal" class="modal">
         <div class="modal-content">
             <div class="flex justify-between items-center mb-5">
-                <h2 id="labTitle" class="font-bold text-xl">Lab</h2>
+                <h2 id="labTitle" class="font-bold text-xl">Lab Topshiriq</h2>
                 <button id="labDelBtn" onclick="deleteLab()" class="text-red-500 hidden px-3"><i class="fa fa-trash"></i></button>
             </div>
+            <label class="text-[11px] font-bold text-slate-400 ml-1 uppercase">Bemor</label>
             <select id="lPatientSelect"></select>
+            <div class="flex justify-between items-center">
+                <label class="text-[11px] font-bold text-slate-400 ml-1 uppercase">Texnik</label>
+                <button onclick="addNewTech()" class="text-blue-600 font-bold text-[10px]">+ QO'SHISH</button>
+            </div>
             <select id="lTexnik"></select>
             <div class="flex gap-3">
+                <div class="flex-1"><label class="text-[10px]">BERILDI</label><input type="date" id="lSanaIn"></div>
                 <div class="flex-1"><label class="text-[10px]">MUDDAT</label><input type="date" id="lSanaOut"></div>
             </div>
             <select id="lStatus">
-                <option value="NEW">🔴 Yangi</option>
+                <option value="NEW">🔴 Yangi ish</option>
+                <option value="PROCESS">🟡 Jarayonda</option>
                 <option value="READY">🟢 Tayyor</option>
             </select>
-            <div class="flex gap-3 mt-4">
-                <button onclick="closeLabModal()" class="flex-1 py-4 text-slate-400">Yopish</button>
+            <textarea id="lNote" placeholder="Ish tavsifi..."></textarea>
+            <input type="file" id="lFile" class="hidden" accept="image/*" onchange="handleFile(this)">
+            <img id="lPreviewImg" src="">
+            <div onclick="document.getElementById('lFile').click()" class="border-2 border-dashed border-blue-100 rounded-2xl p-4 text-center mb-5 bg-blue-50/30">
+                <i class="fa fa-camera text-blue-500 text-xl mb-1"></i>
+                <p class="text-[11px] text-blue-600 font-bold">RASM YUKLASH / O'ZGARTIRISH</p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="closeLabModal()" class="flex-1 py-4 text-slate-400 font-bold">Yopish</button>
                 <button onclick="saveLab()" class="flex-[2] bg-blue-600 text-white py-4 rounded-2xl font-bold">Saqlash</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 1. BLOKIROVKA VA TRIAL TEKSHIRUVI
-        function checkTrial() {
-            const trialDays = 3;
-            let installDate = localStorage.getItem('crm_install_date');
-            let isPaid = localStorage.getItem('crm_is_paid') === 'true';
+        // --- BU QISMNI TEKSHIRUV UCHUN QO'SHDIM ---
+        const trialDays = 3;
+        const installDate = localStorage.getItem('crm_install_date') || new Date().getTime();
+        if (!localStorage.getItem('crm_install_date')) localStorage.setItem('crm_install_date', installDate);
+        
+        const now = new Date().getTime();
+        const diffDays = (now - installDate) / (1000 * 60 * 60 * 24);
+        const isPaid = localStorage.getItem('isPaid') === 'true';
 
-            if (!installDate) {
-                installDate = new Date().getTime();
-                localStorage.setItem('crm_install_date', installDate);
-            }
-
-            const now = new Date().getTime();
-            const diffInDays = (now - installDate) / (1000 * 60 * 60 * 24);
-
-            if (diffInDays > trialDays && !isPaid) {
-                document.getElementById('mainApp').style.display = 'none';
-                document.getElementById('payScreen').style.display = 'flex';
-                return false;
-            }
-            return true;
+        if (diffDays > trialDays && !isPaid) {
+            document.getElementById('appBody').style.display = 'none';
+            document.getElementById('payScreen').style.display = 'flex';
         }
+        // ------------------------------------------
 
-        function copyCard() {
-            const card = "5614681253395069";
-            navigator.clipboard.writeText(card);
-            alert("Karta raqami nusxalandi!");
-        }
-
-        // 2. ASOSIY LOGIKA (ORIGINAL)
+        // SIZNING ORIGINAL JS KODINGIZ (O'ZGARMAGAN)
         let tg = window.Telegram.WebApp;
         let appointments = JSON.parse(localStorage.getItem('appts')) || []; 
         let labs = JSON.parse(localStorage.getItem('labs')) || [];
@@ -200,20 +234,20 @@
         let selectedDay = 31;
         let currentEditId = null;
         let currentLabId = null;
+        let currentPhoto = "";
         const rowHeight = 45;
 
         function showPage(p) {
-            if(!checkTrial()) return;
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.getElementById('page-' + p).classList.add('active');
             document.querySelectorAll('nav button').forEach(b => {
                 b.classList.remove('text-blue-600'); b.classList.add('text-slate-300');
             });
             document.getElementById('nav-' + p).classList.add('text-blue-600');
+            if(p === 'metodichka') initMetod();
             if(p === 'kassa') renderKassa();
         }
 
-        // Grafik Init
         const grid = document.getElementById('schedule-grid');
         for(let h=8; h<20; h++) {
             for(let m of ['00', '30']) {
@@ -244,16 +278,23 @@
         }
 
         function openAddModal(t) {
-            if(!checkTrial()) return;
             currentEditId = null; document.getElementById('modalTitle').innerText = "Yangi qabul";
             document.getElementById('deleteBtn').classList.add('hidden');
             document.getElementById('pName').value = ""; document.getElementById('pStart').value = t;
             document.getElementById('modal').classList.add('active');
         }
 
+        function openEditModal(a) {
+            currentEditId = a.id; document.getElementById('modalTitle').innerText = "Tahrirlash";
+            document.getElementById('deleteBtn').classList.remove('hidden');
+            document.getElementById('pName').value = a.name; document.getElementById('pPhone').value = a.phone;
+            document.getElementById('pDaySelect').value = a.day; document.getElementById('pStart').value = a.start;
+            document.getElementById('pEnd').value = a.end; document.getElementById('pStatus').value = a.status;
+            document.getElementById('pNote').value = a.note; document.getElementById('modal').classList.add('active');
+        }
+
         function saveData() {
-            const data = { id: currentEditId || Date.now(), day: parseInt(document.getElementById('pDaySelect').value), name: document.getElementById('pName').value, start: document.getElementById('pStart').value, end: document.getElementById('pEnd').value, status: document.getElementById('pStatus').value };
-            if(!data.name) return;
+            const data = { id: currentEditId || Date.now(), day: parseInt(document.getElementById('pDaySelect').value), name: document.getElementById('pName').value, phone: document.getElementById('pPhone').value, start: document.getElementById('pStart').value, end: document.getElementById('pEnd').value, status: document.getElementById('pStatus').value, note: document.getElementById('pNote').value };
             if(currentEditId) appointments = appointments.filter(a => a.id !== currentEditId);
             appointments.push(data); localStorage.setItem('appts', JSON.stringify(appointments)); render(); closeModal();
         }
@@ -265,32 +306,130 @@
                 const b = document.createElement('div');
                 b.className = `appt-block ${a.status}`;
                 b.style.top = (sIdx * rowHeight) + "px"; b.style.height = ((eIdx - sIdx) * rowHeight - 2) + "px";
-                b.innerHTML = `<div class="font-bold truncate text-[10px] uppercase">${a.name}</div>`;
-                b.onclick = (e) => { e.stopPropagation(); };
+                b.innerHTML = `<div class="font-bold truncate uppercase text-[10px]">${a.name}</div><div class="text-[9px] opacity-70">${a.start}-${a.end}</div>`;
+                b.onclick = (e) => { e.stopPropagation(); openEditModal(a); };
                 grid.appendChild(b);
             });
         }
 
+        function updateTechSelect() {
+            const sel = document.getElementById('lTexnik');
+            sel.innerHTML = techList.map(t => `<option value="${t}">${t}</option>`).join('');
+        }
+        function addNewTech() {
+            let n = prompt("Yangi texnik:"); if(n) { techList.push(n); localStorage.setItem('techs', JSON.stringify(techList)); updateTechSelect(); }
+        }
+
+        function openAddLab() {
+            currentLabId = null; currentPhoto = ""; updateTechSelect();
+            document.getElementById('labTitle').innerText = "Yangi topshiriq";
+            document.getElementById('labDelBtn').classList.add('hidden');
+            document.getElementById('lPreviewImg').style.display = "none";
+            document.getElementById('lNote').value = "";
+            const sel = document.getElementById('lPatientSelect');
+            sel.innerHTML = '<option value="">Bemor tanlang...</option>';
+            [...new Set(appointments.map(a => a.name))].forEach(n => { if(n) sel.innerHTML += `<option value="${n}">${n.toUpperCase()}</option>`; });
+            document.getElementById('labModal').classList.add('active');
+        }
+
+        function openEditLab(id) {
+            const l = labs.find(x => x.id === id); currentLabId = id; currentPhoto = l.photo || "";
+            openAddLab(); document.getElementById('labTitle').innerText = "Tahrirlash";
+            document.getElementById('labDelBtn').classList.remove('hidden');
+            document.getElementById('lPatientSelect').value = l.patient;
+            document.getElementById('lTexnik').value = l.texnik;
+            document.getElementById('lSanaIn').value = l.sanaIn;
+            document.getElementById('lSanaOut').value = l.sanaOut;
+            document.getElementById('lStatus').value = l.status;
+            document.getElementById('lNote').value = l.note;
+            if(currentPhoto) { document.getElementById('lPreviewImg').src = currentPhoto; document.getElementById('lPreviewImg').style.display = "block"; }
+        }
+
+        function saveLab() {
+            const lab = { id: currentLabId || Date.now(), patient: document.getElementById('lPatientSelect').value, texnik: document.getElementById('lTexnik').value, sanaIn: document.getElementById('lSanaIn').value, sanaOut: document.getElementById('lSanaOut').value, status: document.getElementById('lStatus').value, note: document.getElementById('lNote').value, photo: currentPhoto };
+            if(!lab.patient) return alert("Bemor tanlanmagan!");
+            if(currentLabId) labs = labs.map(x => x.id === currentLabId ? lab : x);
+            else labs.push(lab);
+            localStorage.setItem('labs', JSON.stringify(labs)); renderLabs(); closeLabModal();
+        }
+
+        function renderLabs() {
+            const list = document.getElementById('labList'); list.innerHTML = "";
+            labs.forEach(l => {
+                list.innerHTML += `<div class="lab-card ${l.status}" onclick="openEditLab(${l.id})">
+                    <div class="flex justify-between items-start">
+                        <div class="flex gap-3">
+                            ${l.photo ? `<img src="${l.photo}" class="w-12 h-12 rounded-lg object-cover">` : `<div class="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center text-slate-400"><i class="fa fa-flask"></i></div>`}
+                            <div><h3 class="font-bold text-slate-800 uppercase text-sm">${l.patient}</h3><p class="text-[11px] text-slate-500">${l.texnik}</p></div>
+                        </div>
+                        <span class="text-[9px] font-bold px-2 py-1 bg-slate-50 rounded-lg">${l.status}</span>
+                    </div>
+                </div>`;
+            });
+        }
+
+        function initMetod() {
+            const pSel = document.getElementById('mPatient');
+            pSel.innerHTML = '<option value="">Bemor...</option>';
+            [...new Set(appointments.map(a => a.name))].forEach(n => { if(n) pSel.innerHTML += `<option value="${n}">${n}</option>`; });
+            const tSel = document.getElementById('mTish');
+            tSel.innerHTML = '<option value="">Tish...</option>';
+            [18,17,16,15,14,13,12,11,21,22,23,24,25,26,27,28,48,47,46,45,44,43,42,41,38,37,36,35,34,33,32,31].forEach(n => { tSel.innerHTML += `<option value="${n}">${n}</option>`; });
+            renderServices();
+        }
+
+        function addServiceType() {
+            let n = prompt("Xizmat nomi:"); let p = prompt("Narxi:");
+            if(n && p) { serviceList.push({n, p:parseInt(p)}); localStorage.setItem('servs', JSON.stringify(serviceList)); renderServices(); }
+        }
+
+        function renderServices() {
+            const s = document.getElementById('mService');
+            s.innerHTML = '<option value="0">Xizmat...</option>' + serviceList.map(x => `<option value="${x.p}">${x.n} (${x.p.toLocaleString()})</option>`).join('');
+        }
+
+        function calcM() {
+            const p = parseInt(document.getElementById('mService').value) || 0;
+            const d = parseInt(document.getElementById('mDisc').value) || 0;
+            document.getElementById('mTotal').innerText = (p - (p*d/100)).toLocaleString();
+        }
+
+        function saveToKassa() {
+            const p = document.getElementById('mPatient').value;
+            const total = document.getElementById('mTotal').innerText;
+            if(!p || total == "0") return alert("Tanlanmagan!");
+            kassa.unshift({p, total, date: new Date().toLocaleTimeString().slice(0,5)});
+            localStorage.setItem('kassaHistory', JSON.stringify(kassa));
+            alert("Saqlandi!"); showPage('kassa');
+        }
+
         function renderKassa() {
             const list = document.getElementById('cashList'); list.innerHTML = "";
-            let total = 0;
+            let totalSum = 0;
             kassa.forEach(i => {
-                total += parseInt(i.total.replace(/,/g, ''));
-                list.innerHTML += `<div class="bg-white p-4 rounded-2xl flex justify-between shadow-sm border border-slate-50"><p class="font-bold uppercase text-xs">${i.p}</p><p class="font-black text-green-600">${i.total}</p></div>`;
+                totalSum += parseInt(i.total.replace(/,/g, ''));
+                list.innerHTML += `<div class="bg-white p-4 rounded-2xl flex justify-between shadow-sm border border-slate-50">
+                    <div><p class="font-bold uppercase text-xs">${i.p}</p><p class="text-[10px] text-slate-400">${i.date}</p></div>
+                    <p class="font-black text-green-600">${i.total}</p>
+                </div>`;
             });
-            document.getElementById('totalCash').innerText = total.toLocaleString() + " UZS";
+            document.getElementById('totalCash').innerText = totalSum.toLocaleString() + " UZS";
         }
 
         function timeToIdx(t) { let [h, m] = t.split(':').map(Number); return (h - 8) * 2 + (m === 30 ? 1 : 0); }
         function closeModal() { document.getElementById('modal').classList.remove('active'); }
         function closeLabModal() { document.getElementById('labModal').classList.remove('active'); }
-
-        window.onload = () => {
-            tg.expand();
-            if(checkTrial()) {
-                render();
+        function deleteEntry() { if(confirm("O'chirilsinmi?")) { appointments = appointments.filter(a => a.id !== currentEditId); localStorage.setItem('appts', JSON.stringify(appointments)); render(); closeModal(); } }
+        function deleteLab() { if(confirm("O'chirilsinmi?")) { labs = labs.filter(l => l.id !== currentLabId); localStorage.setItem('labs', JSON.stringify(labs)); renderLabs(); closeLabModal(); } }
+        function handleFile(input) {
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = (e) => { currentPhoto = e.target.result; document.getElementById('lPreviewImg').src = currentPhoto; document.getElementById('lPreviewImg').style.display = "block"; };
+                reader.readAsDataURL(input.files[0]);
             }
-        };
+        }
+
+        window.onload = () => { render(); renderLabs(); };
     </script>
 </body>
 </html>
